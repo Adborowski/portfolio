@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { useIsMobile } from '../hooks/useIsMobile'
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 18 },
@@ -9,23 +10,48 @@ const fadeUp = (delay = 0) => ({
 const SKILLS = ['React', 'TypeScript', 'Next.js', 'React Native', 'Tailwind', 'Vite', 'Node.js']
 
 export default function Hero() {
+  const isMobile = useIsMobile()
+
   return (
     <section style={{
-      minHeight: '58vh',
+      minHeight: isMobile ? 'auto' : '58vh',
       display: 'flex',
       alignItems: 'center',
-      padding: '80px 0 72px',
+      padding: isMobile ? '48px 0 52px' : '80px 0 72px',
     }}>
       <div style={{
         maxWidth: 1100,
         margin: '0 auto',
-        padding: '0 24px',
+        padding: '0 20px',
         width: '100%',
         display: 'flex',
+        flexDirection: isMobile ? 'column' : 'row',
         justifyContent: 'space-between',
-        alignItems: 'center',
-        gap: 48,
+        alignItems: isMobile ? 'flex-start' : 'center',
+        gap: isMobile ? 32 : 48,
       }}>
+        {/* Photo — top on mobile */}
+        {isMobile && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <img
+              src="/profile-picture.jpg"
+              alt="Adam Borowski"
+              style={{
+                width: 96,
+                height: 96,
+                borderRadius: '50%',
+                objectFit: 'cover',
+                border: '3px solid var(--border)',
+                boxShadow: 'var(--shadow)',
+              }}
+            />
+          </motion.div>
+        )}
+
         {/* Text */}
         <div style={{ flex: 1 }}>
           <motion.p
@@ -36,7 +62,7 @@ export default function Hero() {
               fontSize: 13,
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
-              marginBottom: 20,
+              marginBottom: 16,
             }}
           >
             Senior Frontend Engineer
@@ -45,10 +71,10 @@ export default function Hero() {
           <motion.h1
             {...fadeUp(0.08)}
             style={{
-              fontSize: 'clamp(44px, 6.5vw, 76px)',
+              fontSize: isMobile ? 42 : 'clamp(44px, 6.5vw, 76px)',
               lineHeight: 1.04,
               letterSpacing: '-0.03em',
-              marginBottom: 28,
+              marginBottom: 20,
               color: 'var(--text-h)',
             }}
           >
@@ -58,11 +84,11 @@ export default function Hero() {
           <motion.p
             {...fadeUp(0.16)}
             style={{
-              fontSize: 20,
+              fontSize: isMobile ? 17 : 20,
               lineHeight: 1.65,
               color: 'var(--text)',
               maxWidth: 540,
-              marginBottom: 44,
+              marginBottom: 36,
             }}
           >
             Building component-driven products — from Greenfield ERP systems
@@ -89,26 +115,28 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Photo */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          style={{ flexShrink: 0 }}
-        >
-          <img
-            src="/profile-picture.jpg"
-            alt="Adam Borowski"
-            style={{
-              width: 200,
-              height: 200,
-              borderRadius: '50%',
-              objectFit: 'cover',
-              border: '3px solid var(--border)',
-              boxShadow: 'var(--shadow)',
-            }}
-          />
-        </motion.div>
+        {/* Photo — right on desktop */}
+        {!isMobile && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            style={{ flexShrink: 0 }}
+          >
+            <img
+              src="/profile-picture.jpg"
+              alt="Adam Borowski"
+              style={{
+                width: 200,
+                height: 200,
+                borderRadius: '50%',
+                objectFit: 'cover',
+                border: '3px solid var(--border)',
+                boxShadow: 'var(--shadow)',
+              }}
+            />
+          </motion.div>
+        )}
       </div>
     </section>
   )

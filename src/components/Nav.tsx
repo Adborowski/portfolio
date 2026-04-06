@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { useIsMobile } from '../hooks/useIsMobile'
 
 const HASH_LINKS = [
   ['Projects', '/#projects'],
@@ -11,6 +12,7 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
   const isCV = location.pathname === '/cv'
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 24)
@@ -32,7 +34,7 @@ export default function Nav() {
       <div style={{
         maxWidth: 1100,
         margin: '0 auto',
-        padding: '0 24px',
+        padding: '0 20px',
         height: 56,
         display: 'flex',
         alignItems: 'center',
@@ -45,8 +47,8 @@ export default function Nav() {
           Adam Borowski
         </Link>
 
-        <nav style={{ display: 'flex', gap: 28, alignItems: 'center' }}>
-          {HASH_LINKS.map(([label, href]) => (
+        <nav style={{ display: 'flex', gap: isMobile ? 20 : 28, alignItems: 'center' }}>
+          {!isMobile && HASH_LINKS.map(([label, href]) => (
             <a
               key={href}
               href={href}

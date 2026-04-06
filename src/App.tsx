@@ -5,17 +5,20 @@ import ProjectCard from './components/ProjectCard'
 import ExperienceSection from './components/ExperienceSection'
 import AboutSection from './components/AboutSection'
 import ContactSection from './components/ContactSection'
+import { useIsMobile } from './hooks/useIsMobile'
 import './App.css'
 
 export default function App() {
+  const isMobile = useIsMobile()
+
   return (
     <>
       <Nav />
       <main>
         <Hero />
 
-        <section id="projects" style={{ padding: '80px 0 96px', borderTop: '1px solid var(--border)' }}>
-          <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px' }}>
+        <section id="projects" style={{ padding: isMobile ? '56px 0 64px' : '80px 0 96px', borderTop: '1px solid var(--border)' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 20px' }}>
             <p style={{
               color: 'var(--accent)',
               fontWeight: 500,
@@ -26,11 +29,11 @@ export default function App() {
             }}>
               Projects
             </p>
-            <h2 style={{ fontSize: 32, marginBottom: 48 }}>Selected work</h2>
+            <h2 style={{ fontSize: isMobile ? 26 : 32, marginBottom: 40 }}>Selected work</h2>
 
             <FeaturedProject />
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginTop: 20 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 20, marginTop: 20 }}>
               <ProjectCard
                 name="Sejmograf.pl"
                 tagline="Parliament attendance tracker"

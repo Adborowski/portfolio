@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { useIsMobile } from '../hooks/useIsMobile'
 
 const ROLES = [
   {
@@ -32,9 +33,11 @@ const ROLES = [
 ]
 
 export default function ExperienceSection() {
+  const isMobile = useIsMobile()
+
   return (
-    <section style={{ padding: '80px 0 88px', borderTop: '1px solid var(--border)' }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px' }}>
+    <section style={{ padding: isMobile ? '56px 0 64px' : '80px 0 88px', borderTop: '1px solid var(--border)' }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 20px' }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -51,13 +54,13 @@ export default function ExperienceSection() {
           }}>
             Professional Experience
           </p>
-          <h2 style={{ fontSize: 32, marginBottom: 8 }}>Enterprise & agency work</h2>
-          <p style={{ color: 'var(--text)', fontSize: 15, marginBottom: 48, maxWidth: 520 }}>
+          <h2 style={{ fontSize: isMobile ? 26 : 32, marginBottom: 8 }}>Enterprise & agency work</h2>
+          <p style={{ color: 'var(--text)', fontSize: 15, marginBottom: 40, maxWidth: 520 }}>
             Production work across fintech, financial services, and cybersecurity — working with legacy codebases, complex data requirements, and cross-functional teams.
           </p>
         </motion.div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 16 }}>
           {ROLES.map((role, i) => (
             <motion.div
               key={role.company}
@@ -66,7 +69,7 @@ export default function ExperienceSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: i * 0.07 }}
               style={{
-                padding: '24px 28px',
+                padding: '24px',
                 border: '1px solid var(--border)',
                 borderRadius: 12,
               }}

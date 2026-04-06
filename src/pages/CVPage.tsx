@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import Nav from '../components/Nav'
+import { useIsMobile } from '../hooks/useIsMobile'
 
 const EXPERIENCE = [
   {
@@ -108,6 +109,8 @@ function Divider() {
 }
 
 export default function CVPage() {
+  const isMobile = useIsMobile()
+
   return (
     <>
       <Nav />
@@ -197,7 +200,7 @@ export default function CVPage() {
             <SectionLabel>Experience</SectionLabel>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 36 }}>
               {EXPERIENCE.map((job, i) => (
-                <motion.div key={job.company} {...fadeUp(i * 0.06)} style={{ display: 'grid', gridTemplateColumns: '160px 1fr', gap: '0 32px' }}>
+                <motion.div key={job.company} {...fadeUp(i * 0.06)} style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '160px 1fr', gap: isMobile ? '0' : '0 32px' }}>
                   <p style={{ fontSize: 13, color: 'var(--text)', paddingTop: 3, lineHeight: 1.5 }}>{job.period}</p>
                   <div>
                     <p style={{ fontSize: 16, fontWeight: 500, color: 'var(--text-h)', marginBottom: 2 }}>{job.company}</p>
@@ -216,7 +219,7 @@ export default function CVPage() {
             <SectionLabel>Education</SectionLabel>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
               {EDUCATION.map((edu, i) => (
-                <motion.div key={edu.institution} {...fadeUp(i * 0.06)} style={{ display: 'grid', gridTemplateColumns: '160px 1fr', gap: '0 32px' }}>
+                <motion.div key={edu.institution} {...fadeUp(i * 0.06)} style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '160px 1fr', gap: isMobile ? '0' : '0 32px' }}>
                   <p style={{ fontSize: 13, color: 'var(--text)', paddingTop: 3 }}>{edu.period}</p>
                   <div>
                     <p style={{ fontSize: 16, fontWeight: 500, color: 'var(--text-h)', marginBottom: 2 }}>{edu.institution}</p>
@@ -263,7 +266,7 @@ export default function CVPage() {
           <Divider />
 
           {/* Languages & Certificates */}
-          <motion.section {...fadeUp(0)} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48 }}>
+          <motion.section {...fadeUp(0)} style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? 36 : 48 }}>
             <div>
               <SectionLabel>Languages</SectionLabel>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>

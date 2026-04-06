@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { useIsMobile } from '../hooks/useIsMobile'
 
 const TECH = ['React 19', 'TypeScript', 'Tailwind v4', 'shadcn/ui', 'React Router v7', 'Recharts', 'Vite']
 
@@ -18,6 +19,8 @@ const SCREENSHOTS = [
 const TAGS = ['ERP', 'E-Commerce', 'Greenfield', 'Platform Architecture']
 
 export default function FeaturedProject() {
+  const isMobile = useIsMobile()
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 24 }}
@@ -32,7 +35,7 @@ export default function FeaturedProject() {
     >
       {/* Header bar */}
       <div style={{
-        padding: '16px 28px',
+        padding: '16px 24px',
         borderBottom: '1px solid var(--border)',
         background: 'var(--bg-subtle)',
         display: 'flex',
@@ -57,31 +60,32 @@ export default function FeaturedProject() {
             </span>
           ))}
         </div>
-        <span style={{ fontSize: 12, color: 'var(--text)' }}>Featured project</span>
+        {!isMobile && <span style={{ fontSize: 12, color: 'var(--text)' }}>Featured project</span>}
       </div>
 
-      {/* Two-column body */}
+      {/* Body */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: '1fr 1.15fr',
+        gridTemplateColumns: isMobile ? '1fr' : '1fr 1.15fr',
       }}>
-        {/* Left: description */}
+        {/* Description */}
         <div style={{
-          padding: '36px 36px',
-          borderRight: '1px solid var(--border)',
+          padding: isMobile ? '28px 24px' : '36px 36px',
+          borderRight: isMobile ? 'none' : '1px solid var(--border)',
+          borderBottom: isMobile ? '1px solid var(--border)' : 'none',
           display: 'flex',
           flexDirection: 'column',
         }}>
-          <h3 style={{ fontSize: 26, marginBottom: 6 }}>AutoServ ERP</h3>
-          <p style={{ color: 'var(--accent)', fontWeight: 500, fontSize: 14, marginBottom: 20 }}>
+          <h3 style={{ fontSize: isMobile ? 22 : 26, marginBottom: 6 }}>AutoServ ERP</h3>
+          <p style={{ color: 'var(--accent)', fontWeight: 500, fontSize: 14, marginBottom: 16 }}>
             Automotive workshop ERP with integrated parts shop
           </p>
-          <p style={{ lineHeight: 1.75, marginBottom: 28, color: 'var(--text)', fontSize: 15 }}>
+          <p style={{ lineHeight: 1.75, marginBottom: 24, color: 'var(--text)', fontSize: 15 }}>
             Greenfield frontend demo built around a shared component layer — the same <code>ui/</code> foundation
             powers both the ERP and the Shop, so design system changes propagate across both surfaces simultaneously.
           </p>
 
-          <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 32px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px', display: 'flex', flexDirection: 'column', gap: 12 }}>
             {HIGHLIGHTS.map((item, i) => (
               <li key={i} style={{ display: 'flex', gap: 10, fontSize: 14, lineHeight: 1.65 }}>
                 <span style={{ color: 'var(--accent)', flexShrink: 0, marginTop: 1, fontSize: 16 }}>→</span>
@@ -90,7 +94,7 @@ export default function FeaturedProject() {
             ))}
           </ul>
 
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 32 }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 28 }}>
             {TECH.map(t => (
               <span key={t} style={{
                 fontSize: 12,
@@ -142,8 +146,8 @@ export default function FeaturedProject() {
           </div>
         </div>
 
-        {/* Right: screenshots */}
-        <div style={{ padding: '28px', display: 'flex', flexDirection: 'column', gap: 10, background: 'var(--bg-subtle)' }}>
+        {/* Screenshots */}
+        <div style={{ padding: isMobile ? '20px 24px' : '28px', display: 'flex', flexDirection: 'column', gap: 10, background: 'var(--bg-subtle)' }}>
           <img
             src={SCREENSHOTS[0].src}
             alt={SCREENSHOTS[0].alt}
@@ -155,23 +159,25 @@ export default function FeaturedProject() {
               boxShadow: 'var(--shadow)',
             }}
           />
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-            {SCREENSHOTS.slice(1).map(s => (
-              <img
-                key={s.src}
-                src={s.src}
-                alt={s.alt}
-                style={{
-                  borderRadius: 8,
-                  border: '1px solid var(--border)',
-                  width: '100%',
-                  objectFit: 'cover',
-                  aspectRatio: '16 / 10',
-                  boxShadow: 'var(--shadow)',
-                }}
-              />
-            ))}
-          </div>
+          {!isMobile && (
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+              {SCREENSHOTS.slice(1).map(s => (
+                <img
+                  key={s.src}
+                  src={s.src}
+                  alt={s.alt}
+                  style={{
+                    borderRadius: 8,
+                    border: '1px solid var(--border)',
+                    width: '100%',
+                    objectFit: 'cover',
+                    aspectRatio: '16 / 10',
+                    boxShadow: 'var(--shadow)',
+                  }}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </motion.article>
