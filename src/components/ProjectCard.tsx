@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { BrowserFrame, PhoneFrame } from './DeviceFrames'
 
 interface Props {
   name: string
@@ -10,6 +11,8 @@ interface Props {
   liveUrl?: string
   githubUrl?: string
   badge?: string
+  media?: 'browser' | 'phone'
+  tint?: string
 }
 
 export default function ProjectCard({
@@ -22,9 +25,12 @@ export default function ProjectCard({
   liveUrl,
   githubUrl,
   badge,
+  media = 'browser',
+  tint,
 }: Props) {
   return (
     <motion.article
+      className="project-card"
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -39,16 +45,21 @@ export default function ProjectCard({
     >
       {/* Screenshot */}
       <div style={{
-        aspectRatio: '16 / 9',
+        height: 280,
         overflow: 'hidden',
         borderBottom: '1px solid var(--border)',
-        background: 'var(--bg-subtle)',
+        background: tint
+          ? `linear-gradient(180deg, ${tint}, transparent 90%), var(--bg-subtle)`
+          : 'var(--bg-subtle)',
+        padding: '28px 28px 0',
+        display: 'flex',
+        justifyContent: 'center',
       }}>
-        <img
-          src={screenshot}
-          alt={screenshotAlt ?? `${name} screenshot`}
-          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-        />
+        {media === 'phone' ? (
+          <PhoneFrame src={screenshot} alt={screenshotAlt ?? `${name} screenshot`} />
+        ) : (
+          <BrowserFrame src={screenshot} alt={screenshotAlt ?? `${name} screenshot`} height="100%" />
+        )}
       </div>
 
       {/* Content */}
@@ -80,20 +91,9 @@ export default function ProjectCard({
           {description}
         </p>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginBottom: 20 }}>
-          {tech.map(t => (
-            <span key={t} style={{
-              fontSize: 11,
-              padding: '2px 8px',
-              borderRadius: 6,
-              background: 'var(--bg-subtle)',
-              border: '1px solid var(--border)',
-              color: 'var(--text)',
-            }}>
-              {t}
-            </span>
-          ))}
-        </div>
+        <p style={{ fontSize: 13, color: 'var(--text)', opacity: 0.8, marginBottom: 20, lineHeight: 1.9 }}>
+          {tech.join('  ·  ')}
+        </p>
 
         {(liveUrl || githubUrl) && (
           <div style={{ display: 'flex', gap: 8 }}>
@@ -102,13 +102,14 @@ export default function ProjectCard({
                 href={liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="btn btn-primary"
                 style={{
                   fontSize: 13,
                   fontWeight: 500,
                   padding: '7px 16px',
                   borderRadius: 7,
                   background: 'var(--accent)',
-                  color: '#fff',
+                  color: 'var(--accent-contrast)',
                 }}
               >
                 Live →
@@ -119,6 +120,7 @@ export default function ProjectCard({
                 href={githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="btn btn-ghost"
                 style={{
                   fontSize: 13,
                   fontWeight: 500,

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useIsMobile } from '../hooks/useIsMobile'
+import { BrowserFrame } from './DeviceFrames'
 
 const TECH = ['React 19', 'TypeScript', 'Tailwind v4', 'shadcn/ui', 'React Router v7', 'Recharts', 'Vite']
 
@@ -87,40 +88,37 @@ export default function FeaturedProject() {
 
           <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px', display: 'flex', flexDirection: 'column', gap: 12 }}>
             {HIGHLIGHTS.map((item, i) => (
-              <li key={i} style={{ display: 'flex', gap: 10, fontSize: 14, lineHeight: 1.65 }}>
+              <motion.li
+                key={i}
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.15 + i * 0.08 }}
+                style={{ display: 'flex', gap: 10, fontSize: 14, lineHeight: 1.65 }}
+              >
                 <span style={{ color: 'var(--accent)', flexShrink: 0, marginTop: 1, fontSize: 16 }}>→</span>
                 <span style={{ color: 'var(--text)' }}>{item}</span>
-              </li>
+              </motion.li>
             ))}
           </ul>
 
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 28 }}>
-            {TECH.map(t => (
-              <span key={t} style={{
-                fontSize: 12,
-                padding: '3px 10px',
-                borderRadius: 6,
-                background: 'var(--bg-subtle)',
-                border: '1px solid var(--border)',
-                color: 'var(--text)',
-              }}>
-                {t}
-              </span>
-            ))}
-          </div>
+          <p style={{ fontSize: 13, color: 'var(--text)', opacity: 0.8, marginBottom: 28, lineHeight: 1.9 }}>
+            {TECH.join('  ·  ')}
+          </p>
 
           <div style={{ display: 'flex', gap: 10, marginTop: 'auto' }}>
             <a
               href="https://erp-auto.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
+              className="btn btn-primary"
               style={{
                 fontSize: 14,
                 fontWeight: 500,
                 padding: '9px 20px',
                 borderRadius: 8,
                 background: 'var(--accent)',
-                color: '#fff',
+                color: 'var(--accent-contrast)',
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: 6,
@@ -129,9 +127,10 @@ export default function FeaturedProject() {
               View demo →
             </a>
             <a
-              href="https://github.com/Adborowski"
+              href="https://github.com/Adborowski/erp-auto"
               target="_blank"
               rel="noopener noreferrer"
+              className="btn btn-ghost"
               style={{
                 fontSize: 14,
                 fontWeight: 500,
@@ -147,18 +146,14 @@ export default function FeaturedProject() {
         </div>
 
         {/* Screenshots */}
-        <div style={{ padding: isMobile ? '20px 24px' : '28px', display: 'flex', flexDirection: 'column', gap: 10, background: 'var(--bg-subtle)' }}>
-          <img
-            src={SCREENSHOTS[0].src}
-            alt={SCREENSHOTS[0].alt}
-            style={{
-              borderRadius: 8,
-              border: '1px solid var(--border)',
-              width: '100%',
-              objectFit: 'cover',
-              boxShadow: 'var(--shadow)',
-            }}
-          />
+        <div style={{
+          padding: isMobile ? '20px 24px' : '28px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 10,
+          background: 'linear-gradient(180deg, var(--accent-bg), transparent 90%), var(--bg-subtle)',
+        }}>
+          <BrowserFrame src={SCREENSHOTS[0].src} alt={SCREENSHOTS[0].alt} />
           {!isMobile && (
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
               {SCREENSHOTS.slice(1).map(s => (

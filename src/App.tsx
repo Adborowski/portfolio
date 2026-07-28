@@ -29,7 +29,7 @@ export default function App() {
             }}>
               Projects
             </p>
-            <h2 style={{ fontSize: isMobile ? 26 : 32, marginBottom: 40 }}>Selected work</h2>
+            <h2 style={{ fontSize: isMobile ? 34 : 44, marginBottom: 40 }}>Selected work</h2>
 
             <FeaturedProject />
 
@@ -42,7 +42,10 @@ export default function App() {
                 screenshot="/projects/sejmograf/sejmograf-1.png"
                 screenshotAlt="Sejmograf leaderboard showing MP attendance rankings"
                 liveUrl="https://sejmograf.pl"
+                githubUrl="https://github.com/Adborowski/sejmograf2"
                 badge="Live product"
+                media="browser"
+                tint="rgba(225, 29, 72, 0.07)"
               />
               <ProjectCard
                 name="Warszapka"
@@ -51,7 +54,10 @@ export default function App() {
                 tech={['React Native', 'Expo', 'TypeScript', 'Zustand', 'Firebase', 'expo-location']}
                 screenshot="/projects/warszapka/IMG_2823.jpeg"
                 screenshotAlt="Warszapka map view with district markers"
+                githubUrl="https://github.com/Adborowski/warszapka"
                 badge="Mobile"
+                media="phone"
+                tint="rgba(34, 197, 94, 0.07)"
               />
             </div>
           </div>

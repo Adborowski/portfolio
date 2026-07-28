@@ -26,7 +26,7 @@ export default function ContactSection() {
         }}>
           Contact
         </p>
-        <h2 style={{ fontSize: 32, marginBottom: 12 }}>Get in touch</h2>
+        <h2 style={{ fontSize: 42, marginBottom: 12 }}>Get in touch</h2>
         <p style={{ color: 'var(--text)', marginBottom: 36, maxWidth: 380 }}>
           Open to new opportunities. Best reached by email.
         </p>
@@ -34,13 +34,14 @@ export default function ContactSection() {
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
           <a
             href={`mailto:${LINKS.email}`}
+            className="btn btn-primary"
             style={{
               fontSize: 14,
               fontWeight: 500,
               padding: '10px 22px',
               borderRadius: 8,
               background: 'var(--accent)',
-              color: '#fff',
+              color: 'var(--accent-contrast)',
             }}
           >
             {LINKS.email}
@@ -51,6 +52,7 @@ export default function ContactSection() {
               href={LINKS.github}
               target="_blank"
               rel="noopener noreferrer"
+              className="btn btn-ghost"
               style={{
                 fontSize: 14,
                 fontWeight: 500,
@@ -69,6 +71,7 @@ export default function ContactSection() {
               href={LINKS.linkedin}
               target="_blank"
               rel="noopener noreferrer"
+              className="btn btn-ghost"
               style={{
                 fontSize: 14,
                 fontWeight: 500,

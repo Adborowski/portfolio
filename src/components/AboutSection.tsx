@@ -4,7 +4,7 @@ import { useIsMobile } from '../hooks/useIsMobile'
 const SKILLS = [
   'React', 'TypeScript', 'Next.js', 'React Native', 'Node.js',
   'Tailwind CSS', 'Vite', 'Firebase', 'Framer Motion',
-  'REST APIs', 'CI/CD', 'Claude Code',
+  'REST APIs', 'CI/CD', 'Figma', 'Claude Code',
 ]
 
 export default function AboutSection() {
@@ -37,7 +37,7 @@ export default function AboutSection() {
           alignItems: 'start',
         }}>
           <div>
-            <h2 style={{ fontSize: isMobile ? 26 : 32, marginBottom: 20 }}>
+            <h2 style={{ fontSize: isMobile ? 34 : 44, marginBottom: 20 }}>
               Frontend engineer,<br />systems thinker
             </h2>
             <p style={{ lineHeight: 1.8, color: 'var(--text)', marginBottom: 16 }}>
@@ -55,15 +55,13 @@ export default function AboutSection() {
             <h3 style={{ fontSize: 15, marginBottom: 18, color: 'var(--text-h)', fontWeight: 500, letterSpacing: 0 }}>
               Tech I work with
             </h3>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 24 }}>
               {SKILLS.map(skill => (
                 <span key={skill} style={{
-                  fontSize: 13,
-                  padding: '5px 13px',
-                  borderRadius: 6,
-                  background: 'var(--bg-subtle)',
-                  border: '1px solid var(--border)',
+                  fontSize: 14,
                   color: 'var(--text)',
+                  padding: '7px 0',
+                  borderBottom: '1px solid var(--border)',
                 }}>
                   {skill}
                 </span>

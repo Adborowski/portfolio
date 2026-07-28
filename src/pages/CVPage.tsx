@@ -71,7 +71,7 @@ const PROJECTS = [
 const SKILLS = [
   'JavaScript (ES6+)', 'TypeScript', 'React', 'Next.js', 'Node.js',
   'React Native', 'HTML5', 'CSS / SASS', 'Tailwind', 'REST APIs',
-  'Git', 'CI/CD', 'Agile', 'AI Workflows (Claude Code)',
+  'Git', 'CI/CD', 'Agile', 'Figma', 'AI Workflows (Claude Code)',
 ]
 
 const CERTIFICATES = [
