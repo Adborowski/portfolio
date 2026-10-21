@@ -1,19 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --text: #57534e;
-  --text-h: #1c1917;
-  --bg: #fdfcfa;
-  --bg-subtle: #f5f3ef;
-  --border: #e8e5e0;
-  --accent: #c2410c;
-  --accent-bg: rgba(194, 65, 12, 0.07);
-  --accent-border: rgba(194, 65, 12, 0.28);
-  --accent-contrast: #ffffff;
-  --shadow: 0 4px 24px rgba(28, 25, 23, 0.06), 0 1px 4px rgba(28, 25, 23, 0.04);
+  --text: #5b6472;
+  --text-h: #0f172a;
+  --bg: #ffffff;
+  --bg-subtle: #f7f8fa;
+  --border: #eceef2;
+  --accent: #2bf06b;
+  --accent-text: #0a7a35;
+  --accent-bg: rgba(43, 240, 107, 0.1);
+  --accent-border: rgba(10, 122, 53, 0.28);
+  --accent-contrast: #04210f;
+  --shadow: 0 6px 28px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.04);
 
   --sans: 'Inter Variable', system-ui, 'Segoe UI', Roboto, sans-serif;
-  --display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --display: 'Bricolage Grotesque Variable', 'Inter Variable', system-ui, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
   font: 16px/165% var(--sans);
@@ -27,16 +28,17 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text: #a8a29e;
-    --text-h: #f5f4f1;
-    --bg: #141211;
-    --bg-subtle: #1c1a18;
-    --border: #2f2c28;
-    --accent: #fb923c;
-    --accent-bg: rgba(251, 146, 60, 0.09);
-    --accent-border: rgba(251, 146, 60, 0.3);
-    --accent-contrast: #1c1208;
-    --shadow: 0 4px 24px rgba(0, 0, 0, 0.35), 0 1px 4px rgba(0, 0, 0, 0.2);
+    --text: #9aa3b2;
+    --text-h: #f3f5f8;
+    --bg: #0d0f13;
+    --bg-subtle: #14171d;
+    --border: #232832;
+    --accent: #4dff85;
+    --accent-text: #4dff85;
+    --accent-bg: rgba(77, 255, 133, 0.08);
+    --accent-border: rgba(77, 255, 133, 0.3);
+    --accent-contrast: #03190b;
+    --shadow: 0 6px 28px rgba(0, 0, 0, 0.35), 0 1px 3px rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -48,19 +50,19 @@ body {
   margin: 0;
 }
 
-/* Display type — large headings get the serif voice */
+/* Display type — large headings get Bricolage's voice */
 h1, h2 {
   font-family: var(--display);
-  font-weight: 400;
+  font-weight: 600;
   color: var(--text-h);
   margin: 0;
-  letter-spacing: 0.005em;
-  line-height: 1.1;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
 }
 
 /* Workhorse headings — cards, sub-sections */
 h3, h4 {
-  font-family: var(--sans);
+  font-family: var(--display);
   font-weight: 600;
   color: var(--text-h);
   margin: 0;
@@ -72,7 +74,7 @@ p {
 }
 
 a {
-  color: var(--accent);
+  color: var(--accent-text);
   text-decoration: none;
 }
 
@@ -89,6 +91,36 @@ code {
   border: 1px solid var(--border);
   border-radius: 4px;
   color: var(--text-h);
+}
+
+/* Hero dot field (HeroBackground): densest on the right, fading out at every edge and
+   under the headline. On phones it retreats to the top-right corner behind the photo row. */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse 75% 85% at 72% 45%, #000 25%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 85% at 72% 45%, #000 25%, transparent 75%);
+}
+@media (max-width: 767px) {
+  .hero-bg {
+    opacity: 0.6;
+    mask-image: radial-gradient(ellipse 90% 30% at 100% 0%, #000 20%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 90% 30% at 100% 0%, #000 20%, transparent 100%);
+  }
+}
+
+/* Neon highlighter behind accent words in the hero headline */
+.headline-accent {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  padding: 0 0.1em;
+  margin: 0 -0.02em;
+  border-radius: 0.12em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
 /* Buttons */
@@ -126,15 +158,26 @@ code {
   transform: scale(1.03);
 }
 
+.shot-thumb {
+  transition: opacity 0.16s ease, border-color 0.16s ease;
+}
+.shot-thumb:hover {
+  opacity: 1 !important;
+}
+.shot-thumb:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .btn, .project-card, .frame-shot {
+  .btn, .project-card, .frame-shot, .shot-thumb {
     transition: none;
   }
 }
 
 /* Nav backdrop when scrolled */
 .nav-scrolled {
-  background: rgba(253, 252, 250, 0.88) !important;
+  background: rgba(255, 255, 255, 0.85) !important;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom-color: var(--border) !important;
@@ -142,6 +185,6 @@ code {
 
 @media (prefers-color-scheme: dark) {
   .nav-scrolled {
-    background: rgba(20, 18, 17, 0.88) !important;
+    background: rgba(13, 15, 19, 0.85) !important;
   }
 }

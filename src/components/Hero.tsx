@@ -1,5 +1,8 @@
 import { motion } from "framer-motion";
 import { useIsMobile } from "../hooks/useIsMobile";
+import KineticHeadline from "./KineticHeadline";
+import HeroBackground from "./HeroBackground";
+import { PROFILE } from "../data/cv";
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 18 },
@@ -22,8 +25,24 @@ export default function Hero() {
   const isMobile = useIsMobile();
 
   return (
-    <section style={{ padding: isMobile ? "48px 0 64px" : "96px 0 104px" }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 20px" }}>
+    <section
+      style={{
+        padding: isMobile ? "48px 0 64px" : "104px 0 112px",
+        overflowX: "clip",
+        position: "relative",
+        background:
+          "radial-gradient(60% 70% at 85% 0%, var(--accent-bg), transparent 70%)",
+      }}
+    >
+      <HeroBackground />
+      <div
+        style={{
+          position: "relative",
+          maxWidth: 1100,
+          margin: "0 auto",
+          padding: "0 20px",
+        }}
+      >
         {/* Identity row */}
         <motion.div
           {...fadeUp(0)}
@@ -52,27 +71,26 @@ export default function Hero() {
               Adam Borowski
             </p>
             <p style={{ color: "var(--text)", fontSize: 14 }}>
-              Senior Frontend Engineer · Warsaw
+              Frontend Developer · Warsaw
             </p>
           </div>
         </motion.div>
 
-        {/* Statement */}
-        <motion.h1
-          {...fadeUp(0.08)}
-          style={{
-            fontSize: isMobile
-              ? "clamp(40px, 11vw, 52px)"
-              : "clamp(56px, 6.5vw, 92px)",
-            lineHeight: 1.06,
-            maxWidth: 900,
-            marginBottom: 28,
-          }}
-        >
-          {/* Frontends for <em style={{ color: 'var(--accent)', fontStyle: 'italic' }}>complex</em> businesses —
-          ERP, <span style={{ whiteSpace: 'nowrap' }}>e-commerce</span>, and mobile. */}
-          Versatile frontend developer with agentic skills
-        </motion.h1>
+        {/* Statement: letters swell under the cursor (see KineticHeadline) */}
+        <motion.div {...fadeUp(0.08)} style={{ marginBottom: 28 }}>
+          <KineticHeadline
+            text="Versatile frontend developer with agentic skills"
+            accentWords={["agentic"]}
+            style={{
+              fontSize: isMobile
+                ? "clamp(40px, 11vw, 52px)"
+                : "clamp(56px, 6.4vw, 92px)",
+              lineHeight: 1.02,
+              letterSpacing: "-0.02em",
+              maxWidth: 1040,
+            }}
+          />
+        </motion.div>
 
         <motion.p
           {...fadeUp(0.16)}
@@ -84,9 +102,9 @@ export default function Hero() {
             marginBottom: 36,
           }}
         >
-          I can deliver beautiful frontend experiences using either classic
-          pre-AI or agent-assisted workflows. I specialize in React and NextJS
-          and want to grow towards mobile applications.
+          4+ years building production React, TypeScript and Next.js apps across
+          fintech and cybersecurity. Lately I ship full-stack projects end to end
+          with AI-assisted workflows — four of them are below.
         </motion.p>
 
         {/* CTAs */}
@@ -126,6 +144,22 @@ export default function Hero() {
             }}
           >
             View CV
+          </a>
+          <a
+            href={PROFILE.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-ghost"
+            style={{
+              fontSize: 15,
+              fontWeight: 500,
+              padding: "11px 24px",
+              borderRadius: 8,
+              border: "1px solid var(--border)",
+              color: "var(--text-h)",
+            }}
+          >
+            See GitHub ↗
           </a>
         </motion.div>
 

@@ -1,36 +1,7 @@
 import { motion } from 'framer-motion'
 import { useIsMobile } from '../hooks/useIsMobile'
+import { EXPERIENCE } from '../data/cv'
 
-const ROLES = [
-  {
-    company: 'IPF Digital',
-    role: 'Frontend Developer',
-    period: 'Feb 2025 – Jan 2026',
-    sector: 'Fintech',
-    description: 'Refactored legacy code, improved state management, defined API contracts, and delivered a short-term loan module handling 10,000+ applications.',
-  },
-  {
-    company: 'Codesealer',
-    role: 'Frontend Developer',
-    period: 'Dec 2023 – Oct 2024',
-    sector: 'Cybersecurity',
-    description: 'Built content-driven frontends for a cybersecurity platform, combining animations, data visuals, and CMS integrations in close collaboration with stakeholders.',
-  },
-  {
-    company: 'Finalto',
-    role: 'Frontend Developer',
-    period: 'Feb 2023 – Nov 2023',
-    sector: 'Financial services',
-    description: 'Developed interactive dashboards, onboarding flows, and motion-driven UIs for a financial services platform using modern web technologies.',
-  },
-  {
-    company: 'Cybercrypt',
-    role: 'Frontend Developer',
-    period: 'Nov 2020 – Mar 2022',
-    sector: 'Cybersecurity',
-    description: 'Created data-visualisation dashboards and marketing frontends for an encryption-security product, with an emphasis on interactive storytelling.',
-  },
-]
 
 export default function ExperienceSection() {
   const isMobile = useIsMobile()
@@ -45,7 +16,7 @@ export default function ExperienceSection() {
           transition={{ duration: 0.45 }}
         >
           <p style={{
-            color: 'var(--accent)',
+            color: 'var(--accent-text)',
             fontWeight: 500,
             fontSize: 13,
             letterSpacing: '0.08em',
@@ -61,7 +32,7 @@ export default function ExperienceSection() {
         </motion.div>
 
         <div>
-          {ROLES.map((role, i) => (
+          {EXPERIENCE.map((role, i) => (
             <motion.div
               key={role.company}
               initial={{ opacity: 0, y: 16 }}
@@ -94,9 +65,14 @@ export default function ExperienceSection() {
                     {role.role} · {role.sector}
                   </span>
                 </div>
-                <p style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--text)', maxWidth: 640 }}>
-                  {role.description}
-                </p>
+                <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 6, maxWidth: 680 }}>
+                  {role.bullets.map(b => (
+                    <li key={b} style={{ display: 'flex', gap: 10, fontSize: 15, lineHeight: 1.65, color: 'var(--text)' }}>
+                      <span style={{ color: 'var(--accent-text)', flexShrink: 0 }}>–</span>
+                      {b}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </motion.div>
           ))}

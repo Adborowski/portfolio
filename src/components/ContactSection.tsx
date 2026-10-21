@@ -17,7 +17,7 @@ export default function ContactSection() {
         style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px' }}
       >
         <p style={{
-          color: 'var(--accent)',
+          color: 'var(--accent-text)',
           fontWeight: 500,
           fontSize: 13,
           letterSpacing: '0.08em',

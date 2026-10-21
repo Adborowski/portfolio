@@ -64,12 +64,12 @@ export default function Nav() {
             style={{
               fontSize: 14,
               fontWeight: isCV ? 500 : 400,
-              color: isCV ? 'var(--accent)' : 'var(--text)',
+              color: isCV ? 'var(--accent-text)' : 'var(--text)',
               transition: 'color 0.15s',
               textDecoration: 'none',
             }}
-            onMouseEnter={e => (e.currentTarget.style.color = isCV ? 'var(--accent)' : 'var(--text-h)')}
-            onMouseLeave={e => (e.currentTarget.style.color = isCV ? 'var(--accent)' : 'var(--text)')}
+            onMouseEnter={e => (e.currentTarget.style.color = isCV ? 'var(--accent-text)' : 'var(--text-h)')}
+            onMouseLeave={e => (e.currentTarget.style.color = isCV ? 'var(--accent-text)' : 'var(--text)')}
           >
             CV
           </Link>

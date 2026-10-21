@@ -20,7 +20,7 @@ export default function AboutSection() {
         style={{ maxWidth: 1100, margin: '0 auto', padding: '0 20px' }}
       >
         <p style={{
-          color: 'var(--accent)',
+          color: 'var(--accent-text)',
           fontWeight: 500,
           fontSize: 13,
           letterSpacing: '0.08em',
@@ -41,13 +41,14 @@ export default function AboutSection() {
               Frontend engineer,<br />systems thinker
             </h2>
             <p style={{ lineHeight: 1.8, color: 'var(--text)', marginBottom: 16 }}>
-              I build scalable frontend systems — with experience across Greenfield products and
-              enterprise codebases. My focus is component architecture, multi-surface products,
-              and translating complex business requirements into clean, maintainable interfaces.
+              I care about UI architecture, testing, performance and accessibility, and I'm at my best
+              turning messy data and complex requirements into interfaces that feel simple. I've done that
+              in regulated fintech, in cybersecurity, and on my own projects.
             </p>
             <p style={{ lineHeight: 1.8, color: 'var(--text)' }}>
-              Recent work has deepened my focus on React Native, mobile-first experiences,
-              and AI-assisted development workflows using Claude Code.
+              My background is broader than code: an LLB in English Law and an MSc in Business
+              Administration and E-Business. That helps me talk to stakeholders, read regulation, and
+              understand why a feature matters before I build it.
             </p>
           </div>
 
